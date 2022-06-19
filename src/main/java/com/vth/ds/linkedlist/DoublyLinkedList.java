@@ -17,6 +17,68 @@ public class DoublyLinkedList {
 
         tail = node;
     }
+    public void deleteNodeAt(int index) {
+        if (index < 0 ) {
+            System.out.println("\nInvalid input to insert node in an linked list.");
+            return;
+        }
+        int currentIndex = 0;
+        Node temp = head;
+        while(currentIndex < index &&  temp!= null){
+            temp = temp.next;
+            currentIndex++;
+        }
+        if(currentIndex == 0){
+            if(head != null){
+                head = head.next;
+                head.prev = null;
+            }
+        }
+        if(temp == null){
+            System.out.println("\nIndex outside the linkedList");
+        }
+        else{
+            if(temp.next != null) {
+                temp.next.prev = temp.prev;
+            }
+            if(temp.prev != null){
+                temp.prev.next = temp.next;
+            }
+
+        }
+    }
+    public void insertNodeAt(int index, Node node){
+        if(index < 0 || node == null){
+            System.out.println("\nInvalid input to insert node in an linked list.");
+            return;
+        }
+        int currentIndex = 0;
+        Node temp = head;
+        while(currentIndex < index &&  temp!= null){
+            temp = temp.next;
+            currentIndex++;
+        }
+        if(currentIndex == 0){
+            if(head != null){
+                node.prev = null;
+                node.next = head;
+            }
+            head = node;
+        }
+        if(temp == null){
+            if(tail != null){
+                node.prev = tail;
+                tail.next = node;
+            }
+            tail = node;
+        }
+        else{
+            node.next = temp;
+            node.prev = temp.prev;
+            temp.prev.next = node;
+        }
+
+    }
     public void delete(){
         if(head == null){
             return;
@@ -29,6 +91,7 @@ public class DoublyLinkedList {
     }
 
     public void printFromHead(){
+        System.out.println("\n");
         Node temp = head;
         while(temp != null){
             System.out.print(temp.data + " ");
@@ -71,5 +134,27 @@ public class DoublyLinkedList {
         linkedList.printFromHead();
         System.out.println();
         linkedList.printFromTail();
+
+        System.out.println("Insert element at index 2 : ");
+        linkedList.insertNodeAt(2, linkedList.newNode(8));
+        linkedList.printFromHead();
+
+        System.out.println("Insert element at index 10 : ");
+        linkedList.insertNodeAt(10, linkedList.newNode(10));
+        linkedList.printFromHead();
+
+        //Delete NodeAt tests
+        linkedList.deleteNodeAt(2);
+        linkedList.printFromHead();
+        linkedList.deleteNodeAt(11);
+        linkedList.deleteNodeAt(4);
+        linkedList.printFromHead();
+        linkedList.deleteNodeAt(2);
+        linkedList.printFromHead();
+        linkedList.deleteNodeAt(2);
+        linkedList.printFromHead();
+        linkedList.deleteNodeAt(0);
+        linkedList.printFromHead();
+//        linkedList.printFromTail();
     }
 }
