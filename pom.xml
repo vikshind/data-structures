@@ -9,6 +9,8 @@
 	<description>This Project demonstrate how to implement differnt Data Structures</description>
 	<properties>
 		<testng.version>6.11</testng.version>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
 	</properties>
 	<dependencies>
 		<dependency>
